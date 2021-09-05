@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}List of Machines{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table border=1>
+    <tr>
+        <th>Machine</th>
+        <th>Actions</th>
+    </tr>
+    {% for machine in machines %}
+    <tr>
+        <td>{{ machine }}</td>
+        <td>
+            <a href="{{ url_for('confirm', machine=machine, function='Isolate') }}"">Isolate</a>
+            |
+            <a href="{{ url_for('confirm', machine=machine, function='Connect') }}">Connect</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
