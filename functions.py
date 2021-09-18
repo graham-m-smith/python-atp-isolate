@@ -10,7 +10,7 @@ import datetime
 def get_lookup_key(tc):
 
     try:
-        record = tc.get_entity('atplookupkey', 'key')
+        record = tc.get_entity('atplookup', 'key')
     except HttpResponseError as err:
         lookup_key = None
         return lookup_key
