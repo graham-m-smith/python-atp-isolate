@@ -1,24 +1,48 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}List of Machines{% endblock %}</h1>
+   <div align="center">
+    <br>
+    <h4 align="center" class="fs-4 fw-bold">List of Machines</h4>
+    <hr class="py-1"></hr>
+</div>
 {% endblock %}
 
 {% block content %}
-<table border=1>
-    <tr>
-        <th>Machine</th>
-        <th>Actions</th>
-    </tr>
-    {% for machine in machines %}
-    <tr>
-        <td>{{ machine }}</td>
-        <td>
-            <a href="{{ url_for('confirm', machine=machine, function='Isolate') }}"">Isolate</a>
-            |
-            <a href="{{ url_for('confirm', machine=machine, function='Connect') }}">Connect</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div align="center">
+    <table id="list" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">Machine</th>
+                <th scope="col">Actions</th>
+            </tr>    
+        </thead>
+        <tbody>
+            {% for machine in machines %}
+            <tr>
+                <td scope="row">{{ machine }}</td>
+                <td>
+                    <a href="{{ url_for('confirm', machine=machine, function='Isolate') }}">
+                        <button type="button" class="btn btn-danger btn-sm">Isolate</button>
+                    </a>
+                    <a href="{{ url_for('confirm', machine=machine, function='Connect') }}">
+                        <button type="button" class="btn btn-primary btn-sm">Connect</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+    
+        </tbody>
+    </table>    
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.2/datatables.min.js"></script>
+<script type='text/javascript'>
+    $(document).ready( function () {
+        $('#list').DataTable({
+            "lengthMenu": [ 25, 50, 75, 100 ]
+        });
+    } );
+</script>
+
 {% endblock %}
